@@ -1,0 +1,85 @@
+/**
+ * Сборка приложения, разворачивание, а также открытие сайта
+ * Требования:
+ * - из командной строки доступен glassfish (утилита администрирования asadmin)
+ * - определена переменна glassfisModules (файл gradle.properties) указывающая на каталог
+ *   с модулями
+ * - определена переменна webBrowser указывающая на приложение "Веб-браузер"
+ * - веб-сервер должен быть запущен (выполнена команда asadmin start-domain)
+ */
+
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+version = '1.0'
+
+dependencies
+{
+    providedCompile fileTree(dir: glassfishModules, include: '*.jar')
+    testCompile fileTree(dir: 'src/main/library', include: '*.jar')
+    compile fileTree(dir: 'src/main/library', include: '*.jar')
+}
+
+compileJava
+{
+    options.debug = true
+}
+
+test
+{
+    testLogging.showStandardStreams = true
+}
+
+war
+{
+    archiveName = 'game.war'
+}
+
+/**
+ * Разворачивание проекта
+ */
+task deployToGlassfish(dependsOn: [ 'war', 'build', 'assemble' ], type:Exec) {
+
+    if (System.properties['os.name'].toLowerCase().contains('windows'))
+    {
+        commandLine 'asadmin.bat'
+    }
+    else
+    {
+        commandLine "asadmin"
+    }
+
+    args "deploy", "--force", "./build/libs/game.war"
+}
+
+build.doLast {
+    deployToGlassfish.execute()
+}
+
+/**
+ * Открытие сайта
+ */
+task openSite(dependsOn: deployToGlassfish, type: Exec) {
+    commandLine webBrowser
+    args 'http://localhost:8080/game'
+}
+
+deployToGlassfish.doLast {
+    openSite.execute()
+}
+
+/**
+ * Конвертирование ресурсов
+ */
+task convertMessage(type: Exec) {
+    commandLine "native2ascii"
+    args "src/main/resources/konofeev/message-ru.properties", "src/main/resources/konofeev/message.properties"
+}
+
+compileJava.dependsOn convertMessage
+compileJava.doFirst {
+    convertMessage.execute()
+}

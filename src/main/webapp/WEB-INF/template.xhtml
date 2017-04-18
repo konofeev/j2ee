@@ -29,7 +29,10 @@
             <div id="left">
                 <ui:insert name="left">
                     <h:form>
-                        <h:commandLink action="content/content">#{bundle['page.template.left']}</h:commandLink>
+                        <h:commandLink action="content/content?faces-redirect=true">#{bundle['page.template.left.menu.content']}</h:commandLink>
+                    </h:form>
+                    <h:form>
+                        <h:commandLink action="login/login?faces-redirect=true">#{bundle['page.template.left.menu.login']}</h:commandLink>
                     </h:form>
                 </ui:insert>
             </div>

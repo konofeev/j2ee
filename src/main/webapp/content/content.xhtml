@@ -8,21 +8,23 @@
     xmlns:c  = "http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:f  = "http://xmlns.jcp.org/jsf/core">
     <body>
-        <ui:composition template="./../WEB-INF/template.xhtml">
-            <ui:define name="menu">
-                <p>#{bundle['page.content.menu']}</p>
-            </ui:define>
+        <div class="container">
+            <ui:composition template="./../WEB-INF/template.xhtml">
+                <ui:define name="menu">
+                    <p>#{bundle['page.content.menu']}</p>
+                </ui:define>
 
-            <ui:define name="content">
-                <h1>#{bundle['page.content.content']}</h1>
+                <ui:define name="content">
+                    <h1>#{bundle['page.content.content']}</h1>
 
-                <c:forEach var="item" items="#{content.contentList}">
-                    <div class="content-item" id="content-item-#{item.id}">
-                        <h2>#{item.name}</h2>
-                        <div>#{item.content}</div>
-                    </div>
-                </c:forEach>
-            </ui:define>
-        </ui:composition>
+                    <c:forEach var="item" items="#{content.contentList}">
+                        <div class="content-item" id="content-item-#{item.id}">
+                            <h2>#{item.name}</h2>
+                            <div>#{item.content}</div>
+                        </div>
+                    </c:forEach>
+                </ui:define>
+            </ui:composition>
+        </div>
     </body>
 </html>

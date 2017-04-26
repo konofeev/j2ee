@@ -6,22 +6,24 @@
       xmlns:ui = "http://java.sun.com/jsf/facelets">
 
     <body>
-        <p>#{bundle['login.header']}</p>
-        <ui:composition template="../WEB-INF/template.xhtml">
-            <ui:define name="content">
-                <h:form>
-                    <h:panelGrid columns="2" border="0">
+        <div class="container">
+            <p>#{bundle['login.header']}</p>
+            <ui:composition template="../WEB-INF/template.xhtml">
+                <ui:define name="content">
+                    <h:form>
+                        <h:panelGrid columns="2" border="0">
 
-                        <h:outputText  value = "#{bundle['login.field.login']}"/>
-                        <h:inputText   value = "#{login.login}" />
+                            <h:outputText  value = "#{bundle['login.field.login']}"/>
+                            <h:inputText   value = "#{login.login}" />
 
-                        <h:outputText  value = "#{bundle['login.field.password']}"/>
-                        <h:inputSecret value = "#{login.password}" />
+                            <h:outputText  value = "#{bundle['login.field.password']}"/>
+                            <h:inputSecret value = "#{login.password}" />
 
-                    </h:panelGrid>
-                    <h:commandButton value="Вход" action="#{login.checkLogin}" />
-                </h:form>
-            </ui:define>
-        </ui:composition>
+                        </h:panelGrid>
+                        <h:commandButton value="Вход" action="#{login.checkLogin}" />
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </div>
     </body>
 </html>

@@ -18,7 +18,7 @@ import konofeev.log.Loggable;
 @Loggable
 public class ContentService
 {
-    @PersistenceContext(unitName="GameDB")
+    @PersistenceContext(unitName="j2ee")
     EntityManager entityManager;
 
     /**

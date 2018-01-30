@@ -5,15 +5,15 @@
     xsi:schemaLocation = "http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
     version            = "2.1">
 
-    <!-- Подключение к БД MySql -->
-    <persistence-unit name = "j2ee" transaction-type = "JTA">
+    <persistence-unit name = "j2ee" transaction-type = "RESOURCE_LOCAL">
 
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>jdbc/JeeResource</jta-data-source>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <class>konofeev.entities.Content</class>
 
         <properties>
-
+            <property name="javax.persistence.jdbc.driver"   value="org.apache.derby.jdbc.ClientDriver" />
+            <property name="javax.persistence.jdbc.url"      value="jdbc:derby://localhost:1527/j2ee"   />
+            <property name="javax.persistence.jdbc.user"     value="APP"                                />
+            <property name="javax.persistence.jdbc.password" value="APP"                                />
         </properties>
     </persistence-unit>
 </persistence>        

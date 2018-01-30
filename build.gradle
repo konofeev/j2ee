@@ -17,25 +17,24 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 version = '1.0'
 
-buildscript 
-{
-    repositories 
-    {
-        mavenCentral()
-    }
-    dependencies 
-    {
-        classpath 'org.liquibase:liquibase-gradle-plugin:1.1.1'
-        classpath 'mysql:mysql-connector-java:5.1.36'
-    }
-}
-
 dependencies
 {
     providedCompile fileTree(dir: glassfishModules, include: '*.jar')
     testCompile fileTree(dir: 'src/main/library', include: '*.jar')
     compile fileTree(dir: 'src/main/library', include: '*.jar')
 }
+
+buildscript 
+{
+    dependencies 
+    {
+        classpath files('src/main/library/derby-10.14.1.0.jar')
+        classpath files('src/main/library/derbyclient-10.14.1.0.jar')
+        classpath files('src/main/library/liquibase-core-3.5.3.jar')
+        classpath files('src/main/library/liquibase-gradle-plugin-1.2.1.jar')
+    }
+}
+
 compileJava
 {
     options.debug = true
@@ -57,20 +56,27 @@ compileJava.doFirst {
     process.waitFor();
 }
 
-liquibase 
-{
-    activities 
-    {
-        main 
-        {
+liquibase {
+    activities {
+        main {
             File propsFile = new File("${project.rootDir}/src/main/resources/liquibase/liquibase.properties")
             Properties properties = new Properties()
             properties.load(new FileInputStream(propsFile))
             changeLogFile 'src/main/resources/liquibase/changeLogMaster.xml'
-            url 'jdbc:mysql://localhost:3306/j2ee'
-            username mysqlJ2eeUser
-            password mysqlJ2eePassword
+            url 'jdbc:derby://localhost:1527/j2ee;create=true'
+            username 'APP'
+            password 'APP'
         }
         runList = "main"
+    }
+}
+
+task env {
+    doLast {
+        println 'glassfishModules = ' + glassfishModules
+        println 'webBrowser3 = ' + webBrowser3
+        println 'mysqlJ2eeUser = ' + mysqlJ2eeUser
+        println 'mysqlJ2eePassword = ' + mysqlJ2eePassword
+        println 'project.rootDir = ' + "${project.rootDir}"
     }
 }

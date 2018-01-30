@@ -70,13 +70,3 @@ liquibase {
         runList = "main"
     }
 }
-
-task env {
-    doLast {
-        println 'glassfishModules = ' + glassfishModules
-        println 'webBrowser3 = ' + webBrowser3
-        println 'mysqlJ2eeUser = ' + mysqlJ2eeUser
-        println 'mysqlJ2eePassword = ' + mysqlJ2eePassword
-        println 'project.rootDir = ' + "${project.rootDir}"
-    }
-}

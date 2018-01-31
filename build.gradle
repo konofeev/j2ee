@@ -1,13 +1,17 @@
 /**
  * Сборка приложения, разворачивание, а также открытие сайта
  * Требования:
- * - из командной строки доступен glassfish (утилита администрирования asadmin)
- * - определена переменна glassfishModules (файл gradle.properties) указывающая на каталог
- *   с модулями
- * - определена переменна webBrowser указывающая на приложение "Веб-браузер"
- * - веб-сервер должен быть запущен (выполнена команда asadmin start-domain)
+ * - переменная окружения GLASSFISH_HOME указывает на каталог сервера
+ * - переменная окружения DERBY_HOME указывает на каталог Java DB (обычно это каталог $GLASSFISH/javadb)
+ * - запустить БД $DERBY_HOME/bin/startNetworkServer
+ * - запустить сервер $GLASSFISH_HOME/bin/asadmin start-domain
+ * - запустить БД сервера $GLASSFISH_HOME/bin/asadmin start-database
+ * - выполнит обновление БД gradle update
+ * - собрать проект gradle clean war
+ * - развернуть приложение $GLASSFISH_HOME/bin/asadmin deploy ./build/libs/game.war
+ * Задачи:
+ * - автоматизировать сборку и разворачивание
  */
-
 
 apply plugin: 'java'
 apply plugin: 'war'

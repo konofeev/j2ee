@@ -3,9 +3,8 @@
  * Требования:
  * - переменная окружения GLASSFISH_HOME указывает на каталог сервера
  * - переменная окружения DERBY_HOME указывает на каталог Java DB (обычно это каталог $GLASSFISH/javadb)
- * - запустить БД $DERBY_HOME/bin/startNetworkServer
  * - запустить сервер $GLASSFISH_HOME/bin/asadmin start-domain
- * - запустить БД сервера $GLASSFISH_HOME/bin/asadmin start-database
+ * - запустить БД через сервера $GLASSFISH_HOME/bin/asadmin start-database
  * - выполнит обновление БД gradle update
  * - собрать проект gradle clean war
  * - развернуть приложение $GLASSFISH_HOME/bin/asadmin deploy ./build/libs/game.war

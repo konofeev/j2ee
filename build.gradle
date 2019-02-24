@@ -7,8 +7,7 @@
  * - запустить БД через сервера $GLASSFISH_HOME/bin/asadmin start-database
  * - выполнит обновление БД gradle update
  * - собрать проект gradle clean war
- * - развернуть приложение $GLASSFISH_HOME/bin/asadmin deploy ./build/libs/game.war
- * Задачи:
+ * - развернуть приложение $GLASSFISH_HOME/bin/asadmin deploy ./build/libs/game.war * Задачи:
  * - автоматизировать сборку и разворачивание
  */
 
@@ -37,7 +36,6 @@ buildscript
         classpath files('src/main/library/liquibase-gradle-plugin-1.2.1.jar')
     }
 }
-
 compileJava
 {
     options.debug = true
